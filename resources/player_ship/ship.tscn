@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bojrjpcuoafo1"]
+[gd_scene load_steps=14 format=3 uid="uid://bojrjpcuoafo1"]
 
 [ext_resource type="Texture2D" uid="uid://cdk00h57c8e4f" path="res://resources/assets/ship.png" id="1_j3egb"]
 [ext_resource type="Script" path="res://resources/scripts/Ship.cs" id="1_lgidd"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://resources/scripts/PositionClamp.cs" id="5_bdj22"]
 [ext_resource type="Script" path="res://resources/scripts/Spawner.cs" id="7_f4tsb"]
 [ext_resource type="PackedScene" uid="uid://cuxl5scgypn3j" path="res://resources/projectiles/laser.tscn" id="8_3ej2b"]
+[ext_resource type="Script" path="res://resources/scripts/ScaleOnImpact.cs" id="9_0nbd8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_synsy"]
 atlas = ExtResource("1_j3egb")
@@ -88,3 +89,7 @@ position = Vector2(5, -4)
 [node name="Spawner" type="Node2D" parent="Markers/RightMuzzle"]
 script = ExtResource("7_f4tsb")
 Scene = ExtResource("8_3ej2b")
+
+[node name="ScaleOnImpact" type="Node" parent="." node_paths=PackedStringArray("Sprite")]
+script = ExtResource("9_0nbd8")
+Sprite = NodePath("../AnimatedSprite2D")
