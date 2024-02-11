@@ -12,3 +12,7 @@ texture = ExtResource("1_te7po")
 script = ExtResource("2_p5c2d")
 Actor = NodePath("..")
 Velocity = Vector2(0, -200)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(4.76837e-07, 1)
+scale = Vector2(0.2, 0.5)
