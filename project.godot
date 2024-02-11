@@ -8,11 +8,17 @@
 
 config_version=5
 
+[MonoCustomResourceRegistry]
+
+ClassPrefix=""
+SearchType=0
+ResourceScriptDirectories=["res://"]
+
 [application]
 
 config/name="Movement Test"
 run/main_scene="res://scenes/world.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -26,6 +32,14 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="Movement Test"
+
+[editor]
+
+script/templates_search_path="res://.godot/script_templates"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/MonoCustomResourceRegistry/plugin.cfg")
 
 [rendering]
 

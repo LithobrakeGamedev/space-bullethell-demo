@@ -6,4 +6,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>MovementTest</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="resources\components\" />
+  </ItemGroup>
 </Project>
