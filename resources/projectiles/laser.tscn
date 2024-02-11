@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuxl5scgypn3j"]
+
+[ext_resource type="Texture2D" uid="uid://blajmggj33xgn" path="res://resources/assets/laser_small.png" id="1_te7po"]
+[ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="2_p5c2d"]
+
+[node name="Laser" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_te7po")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("Actor")]
+script = ExtResource("2_p5c2d")
+Actor = NodePath("..")
+Velocity = Vector2(0, -200)

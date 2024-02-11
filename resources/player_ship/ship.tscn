@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bojrjpcuoafo1"]
+[gd_scene load_steps=13 format=3 uid="uid://bojrjpcuoafo1"]
 
 [ext_resource type="Texture2D" uid="uid://cdk00h57c8e4f" path="res://resources/assets/ship.png" id="1_j3egb"]
+[ext_resource type="Script" path="res://resources/scripts/Ship.cs" id="1_lgidd"]
 [ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="2_10dq0"]
 [ext_resource type="Script" path="res://resources/scripts/MoveInputComponent.cs" id="3_awplj"]
 [ext_resource type="Resource" uid="uid://dhp15v8484yj0" path="res://resources/player_ship/ship_move_stats.tres" id="4_6jo8f"]
 [ext_resource type="Script" path="res://resources/scripts/PositionClamp.cs" id="5_bdj22"]
+[ext_resource type="Script" path="res://resources/scripts/Spawner.cs" id="7_f4tsb"]
+[ext_resource type="PackedScene" uid="uid://cuxl5scgypn3j" path="res://resources/projectiles/laser.tscn" id="8_3ej2b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_synsy"]
 atlas = ExtResource("1_j3egb")
@@ -46,6 +49,7 @@ animations = [{
 }]
 
 [node name="Ship" type="Node2D"]
+script = ExtResource("1_lgidd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_70pb0")
@@ -64,3 +68,23 @@ MoveStats = ExtResource("4_6jo8f")
 [node name="PositionClamp" type="Node2D" parent="." node_paths=PackedStringArray("Actor")]
 script = ExtResource("5_bdj22")
 Actor = NodePath("..")
+
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="LeftMuzzle" type="Marker2D" parent="Markers"]
+position = Vector2(-5, -4)
+
+[node name="Spawner" type="Node2D" parent="Markers/LeftMuzzle"]
+script = ExtResource("7_f4tsb")
+Scene = ExtResource("8_3ej2b")
+
+[node name="RightMuzzle" type="Marker2D" parent="Markers"]
+position = Vector2(5, -4)
+
+[node name="Spawner" type="Node2D" parent="Markers/RightMuzzle"]
+script = ExtResource("7_f4tsb")
+Scene = ExtResource("8_3ej2b")
