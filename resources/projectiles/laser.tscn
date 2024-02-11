@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuxl5scgypn3j"]
+[gd_scene load_steps=7 format=3 uid="uid://cuxl5scgypn3j"]
 
 [ext_resource type="Script" path="res://resources/scripts/Laser.cs" id="1_40h6y"]
 [ext_resource type="Texture2D" uid="uid://blajmggj33xgn" path="res://resources/assets/laser_small.png" id="1_te7po"]
 [ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="2_p5c2d"]
 [ext_resource type="Script" path="res://resources/scripts/ScaleOnImpact.cs" id="3_rj11m"]
+[ext_resource type="Script" path="res://resources/scripts/Flash.cs" id="5_ovfvi"]
+[ext_resource type="Material" uid="uid://c88q6pkhh3vl" path="res://resources/effects/white_flash_material.tres" id="6_dweqh"]
 
 [node name="Laser" type="Node2D"]
 script = ExtResource("1_40h6y")
@@ -25,3 +27,9 @@ script = ExtResource("3_rj11m")
 Sprite = NodePath("../Sprite2D")
 ScaleAmount = Vector2(2, 2)
 ScaleDuration = 0.8
+
+[node name="Flash" type="Node" parent="." node_paths=PackedStringArray("Sprite")]
+script = ExtResource("5_ovfvi")
+FlashMaterial = ExtResource("6_dweqh")
+Sprite = NodePath("../Sprite2D")
+FlashDuration = 0.1

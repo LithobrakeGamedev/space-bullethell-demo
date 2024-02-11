@@ -9,5 +9,6 @@ public partial class Laser : Node2D {
 	public override void _Ready() {
 		GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D").ScreenExited += QueueFree;
 		GetNode<ScaleOnImpact>("ScaleOnImpact").TweenScale();
+		GetNode<Flash>("Flash").ApplyFlash();
 	}
 }
