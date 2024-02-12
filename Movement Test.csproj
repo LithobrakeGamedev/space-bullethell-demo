@@ -9,4 +9,9 @@
   <ItemGroup>
     <Folder Include="resources\components\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Chickensoft.AutoInject" Version="1.5.0" />
+    <PackageReference Include="Chickensoft.SuperNodes" Version="1.7.0" />
+    <PackageReference Include="Chickensoft.SuperNodes.Types" Version="1.7.0" />
+  </ItemGroup>
 </Project>
