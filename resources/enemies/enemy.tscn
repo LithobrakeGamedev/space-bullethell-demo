@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://br42cwo2rmdsy"]
+[gd_scene load_steps=9 format=3 uid="uid://br42cwo2rmdsy"]
 
 [ext_resource type="Script" path="res://resources/enemies/Enemy.cs" id="1_ceeb1"]
 [ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="2_tcq08"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" path="res://resources/scripts/Flash.cs" id="4_fskyf"]
 [ext_resource type="Script" path="res://resources/components/shake_component.gd" id="5_pbjcn"]
 [ext_resource type="Script" path="res://resources/scripts/EntityStats.cs" id="6_l8s4p"]
+[ext_resource type="Script" path="res://resources/scripts/HitboxComp.cs" id="7_refyh"]
+[ext_resource type="Script" path="res://resources/scripts/HurtboxComp.cs" id="8_x7gyy"]
 
-[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats")]
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats", "hitbox", "hurtbox")]
 script = ExtResource("1_ceeb1")
 animatedSprite2D = NodePath("AnimatedSprite2D")
 moveComponent = NodePath("MoveComponent")
@@ -15,6 +17,8 @@ visibleOnScreenNotifier = NodePath("VisibleOnScreenNotifier2D")
 scaleOnImpact = NodePath("ScaleOnImpact")
 flash = NodePath("Flash")
 entityStats = NodePath("EntityStats")
+hitbox = NodePath("HitboxComp")
+hurtbox = NodePath("HurtboxComp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
@@ -38,3 +42,9 @@ node = NodePath("../AnimatedSprite2D")
 
 [node name="EntityStats" type="Node" parent="."]
 script = ExtResource("6_l8s4p")
+
+[node name="HitboxComp" type="Area2D" parent="."]
+script = ExtResource("7_refyh")
+
+[node name="HurtboxComp" type="Area2D" parent="."]
+script = ExtResource("8_x7gyy")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuxl5scgypn3j"]
+[gd_scene load_steps=9 format=3 uid="uid://cuxl5scgypn3j"]
 
 [ext_resource type="Script" path="res://resources/scripts/Laser.cs" id="1_40h6y"]
 [ext_resource type="Texture2D" uid="uid://blajmggj33xgn" path="res://resources/assets/laser_small.png" id="1_te7po"]
@@ -6,9 +6,14 @@
 [ext_resource type="Script" path="res://resources/scripts/ScaleOnImpact.cs" id="3_rj11m"]
 [ext_resource type="Script" path="res://resources/scripts/Flash.cs" id="5_ovfvi"]
 [ext_resource type="Material" uid="uid://c88q6pkhh3vl" path="res://resources/effects/white_flash_material.tres" id="6_dweqh"]
+[ext_resource type="Script" path="res://resources/scripts/HitboxComp.cs" id="7_y7d7m"]
 
-[node name="Laser" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f21t2"]
+size = Vector2(4, 10)
+
+[node name="Laser" type="Node2D" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("1_40h6y")
+hitbox = NodePath("HitboxComp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_te7po")
@@ -33,3 +38,12 @@ script = ExtResource("5_ovfvi")
 FlashMaterial = ExtResource("6_dweqh")
 Sprite = NodePath("../Sprite2D")
 FlashDuration = 0.1
+
+[node name="HitboxComp" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("7_y7d7m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComp"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_f21t2")
