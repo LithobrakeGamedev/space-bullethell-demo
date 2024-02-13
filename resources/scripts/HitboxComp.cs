@@ -6,7 +6,7 @@ namespace MovementTest.resources.scripts;
 
 [RegisteredType("HitboxComp", "", nameof(Area2D))]
 public partial class HitboxComp : Area2D {
-    [Export] private int damage = 1;
+    [Export] public int Damage = 1;
 
     public Action<HurtboxComp> HitHurtbox;
 

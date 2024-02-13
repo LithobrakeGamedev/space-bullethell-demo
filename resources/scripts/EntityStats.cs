@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using MonoCustomResourceRegistry;
 
@@ -12,16 +13,14 @@ public partial class EntityStats : Node {
         set {
             _health = value;
 
-            EmitSignal(SignalName.HealthChanged);
+            HealthChanged?.Invoke();
 
             if (_health <= 0)
-                EmitSignal(SignalName.NoHealth);
+                NoHealth?.Invoke();
         }
     }
-
-    [Signal]
-    public delegate void HealthChangedEventHandler();
-
-    [Signal]
-    public delegate void NoHealthEventHandler();
+    
+    public event Action HealthChanged;
+    
+    public event Action NoHealth;
 }

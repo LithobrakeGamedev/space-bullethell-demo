@@ -16,11 +16,18 @@ public partial class Enemy : Node2D {
 
     [Export] EntityStats entityStats;
 
+    [Export] ShakeComp shake;
+
     [Export] HitboxComp hitbox;
     [Export] HurtboxComp hurtbox;
 
     public override void _Ready() {
         visibleOnScreenNotifier.ScreenExited += QueueFree;
-        hurtbox.Hurt += _ => QueueFree();
+        hurtbox.Hurt += _ => {
+            scaleOnImpact.TweenScale();
+            flash.ApplyFlash();
+            shake.TweenShake();
+        };
+        entityStats.NoHealth += QueueFree;
     }
 }

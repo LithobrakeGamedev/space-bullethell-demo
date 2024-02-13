@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://br42cwo2rmdsy"]
+[gd_scene load_steps=11 format=3 uid="uid://br42cwo2rmdsy"]
 
 [ext_resource type="Script" path="res://resources/enemies/Enemy.cs" id="1_ceeb1"]
 [ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="2_tcq08"]
@@ -8,8 +8,10 @@
 [ext_resource type="Script" path="res://resources/scripts/EntityStats.cs" id="6_l8s4p"]
 [ext_resource type="Script" path="res://resources/scripts/HitboxComp.cs" id="7_refyh"]
 [ext_resource type="Script" path="res://resources/scripts/HurtboxComp.cs" id="8_x7gyy"]
+[ext_resource type="Script" path="res://resources/scripts/HurtComp.cs" id="9_rnw8e"]
+[ext_resource type="Script" path="res://resources/scripts/ShakeComp.cs" id="10_7wfhg"]
 
-[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats", "hitbox", "hurtbox")]
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats", "shake", "hitbox", "hurtbox")]
 script = ExtResource("1_ceeb1")
 animatedSprite2D = NodePath("AnimatedSprite2D")
 moveComponent = NodePath("MoveComponent")
@@ -17,6 +19,7 @@ visibleOnScreenNotifier = NodePath("VisibleOnScreenNotifier2D")
 scaleOnImpact = NodePath("ScaleOnImpact")
 flash = NodePath("Flash")
 entityStats = NodePath("EntityStats")
+shake = NodePath("ShakeComp")
 hitbox = NodePath("HitboxComp")
 hurtbox = NodePath("HurtboxComp")
 
@@ -31,6 +34,7 @@ Actor = NodePath("..")
 [node name="ScaleOnImpact" type="Node" parent="." node_paths=PackedStringArray("Sprite")]
 script = ExtResource("3_kwbc8")
 Sprite = NodePath("../AnimatedSprite2D")
+ScaleAmount = Vector2(1.5, 1.5)
 
 [node name="Flash" type="Node" parent="." node_paths=PackedStringArray("Sprite")]
 script = ExtResource("4_fskyf")
@@ -48,3 +52,12 @@ script = ExtResource("7_refyh")
 
 [node name="HurtboxComp" type="Area2D" parent="."]
 script = ExtResource("8_x7gyy")
+
+[node name="HurtComp" type="Node" parent="." node_paths=PackedStringArray("stats", "hurtbox")]
+script = ExtResource("9_rnw8e")
+stats = NodePath("../EntityStats")
+hurtbox = NodePath("../HurtboxComp")
+
+[node name="ShakeComp" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("10_7wfhg")
+node = NodePath("../AnimatedSprite2D")

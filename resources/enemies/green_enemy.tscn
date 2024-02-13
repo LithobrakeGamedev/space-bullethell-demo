@@ -1,31 +1,32 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8et1avskqed"]
+[gd_scene load_steps=10 format=3 uid="uid://b8et1avskqed"]
 
 [ext_resource type="PackedScene" uid="uid://br42cwo2rmdsy" path="res://resources/enemies/enemy.tscn" id="1_ybupi"]
 [ext_resource type="Texture2D" uid="uid://dgq8u3mqbav7t" path="res://resources/assets/green_enemy.png" id="2_nu1q4"]
+[ext_resource type="Material" uid="uid://c88q6pkhh3vl" path="res://resources/effects/white_flash_material.tres" id="3_ulfp0"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7mfb1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_msy5s"]
 atlas = ExtResource("2_nu1q4")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e8jh7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jy7g"]
 atlas = ExtResource("2_nu1q4")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mk8kc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilpm8"]
 atlas = ExtResource("2_nu1q4")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_uuh00"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_81sgp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7mfb1")
+"texture": SubResource("AtlasTexture_msy5s")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e8jh7")
+"texture": SubResource("AtlasTexture_4jy7g")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mk8kc")
+"texture": SubResource("AtlasTexture_ilpm8")
 }],
 "loop": true,
 "name": &"default",
@@ -41,9 +42,8 @@ radius = 6.0
 [node name="GreenEnemy" instance=ExtResource("1_ybupi")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_uuh00")
+sprite_frames = SubResource("SpriteFrames_81sgp")
 autoplay = "default"
-frame_progress = 0.115808
 
 [node name="MoveComponent" parent="." index="1"]
 Velocity = Vector2(0, 40)
@@ -51,8 +51,12 @@ Velocity = Vector2(0, 40)
 [node name="VisibleOnScreenNotifier2D" parent="." index="2"]
 scale = Vector2(0.8, 0.8)
 
+[node name="Flash" parent="." index="4"]
+FlashMaterial = ExtResource("3_ulfp0")
+FlashDuration = 0.2
+
 [node name="EntityStats" parent="." index="6"]
-Health = 2
+Health = 3
 
 [node name="HitboxComp" parent="." index="7"]
 collision_layer = 0
