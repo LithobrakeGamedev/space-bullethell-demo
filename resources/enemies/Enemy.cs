@@ -30,7 +30,12 @@ public partial class Enemy : Node2D {
             flash.ApplyFlash();
             shake.TweenShake();
         };
-        entityStats.NoHealth += () => onDeathEffect.Spawn();
-        entityStats.NoHealth += QueueFree;
+        entityStats.NoHealth += Death;
+        hitbox.HitHurtbox += _ => Death();
+    }
+
+    private void Death() {
+        onDeathEffect.Spawn();
+        QueueFree();
     }
 }
