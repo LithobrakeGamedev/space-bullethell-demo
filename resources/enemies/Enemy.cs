@@ -21,6 +21,8 @@ public partial class Enemy : Node2D {
     [Export] HitboxComp hitbox;
     [Export] HurtboxComp hurtbox;
 
+    [Export] Spawner onDeathEffect;
+
     public override void _Ready() {
         visibleOnScreenNotifier.ScreenExited += QueueFree;
         hurtbox.Hurt += _ => {
@@ -28,6 +30,7 @@ public partial class Enemy : Node2D {
             flash.ApplyFlash();
             shake.TweenShake();
         };
+        entityStats.NoHealth += () => onDeathEffect.Spawn();
         entityStats.NoHealth += QueueFree;
     }
 }
