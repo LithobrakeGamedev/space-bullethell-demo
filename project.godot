@@ -17,7 +17,7 @@ ResourceScriptDirectories=["res://"]
 [application]
 
 config/name="Movement Test"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://resources/menus/menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
