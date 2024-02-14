@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using MonoCustomResourceRegistry;
 
@@ -31,6 +32,7 @@ public partial class Ship : Node2D {
 
         stats.NoHealth += QueueFree;
         stats.NoHealth += () => explodeOnDeath.Spawn();
+        stats.NoHealth += () => PlayerDeath?.Invoke();
     }
 
     public override void _Process(double delta) {
@@ -52,4 +54,6 @@ public partial class Ship : Node2D {
         shipSprite.Play(dir);
         shipFlameSprite.Play(dir);
     }
+
+    public event Action PlayerDeath;
 }
