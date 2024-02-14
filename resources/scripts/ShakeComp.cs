@@ -17,7 +17,7 @@ public partial class ShakeComp : Node {
 
         var tween = CreateTween();
 
-        tween.TweenMethod(Callable.From<float>(val => { shake = val; }), tween, 0f, shakeDuration);
+        tween.TweenProperty(this, nameof(shake), 0f, shakeDuration).FromCurrent();
     }
 
     public override void _PhysicsProcess(double delta) {

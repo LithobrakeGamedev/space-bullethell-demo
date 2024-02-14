@@ -13,6 +13,9 @@ public partial class Ship : Node2D {
     private AnimatedSprite2D shipFlameSprite;
     private MoveComponent moveComponent;
 
+    [Export] EntityStats stats;
+    [Export] Spawner explodeOnDeath;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
         leftMuzzle = GetNode<Spawner>("Markers/LeftMuzzle/Spawner");
@@ -25,6 +28,9 @@ public partial class Ship : Node2D {
         timer.Timeout += FireLasers;
 
         scaleOnImpact = GetNode<ScaleOnImpact>("ScaleOnImpact");
+
+        stats.NoHealth += QueueFree;
+        stats.NoHealth += () => explodeOnDeath.Spawn();
     }
 
     public override void _Process(double delta) {

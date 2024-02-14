@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bojrjpcuoafo1"]
+[gd_scene load_steps=26 format=3 uid="uid://bojrjpcuoafo1"]
 
 [ext_resource type="Texture2D" uid="uid://cdk00h57c8e4f" path="res://resources/assets/ship.png" id="1_j3egb"]
 [ext_resource type="Script" path="res://resources/scripts/Ship.cs" id="1_lgidd"]
@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://cuxl5scgypn3j" path="res://resources/projectiles/laser.tscn" id="8_3ej2b"]
 [ext_resource type="Script" path="res://resources/scripts/ScaleOnImpact.cs" id="9_0nbd8"]
 [ext_resource type="Texture2D" uid="uid://ed3n3bxowp4i" path="res://resources/assets/ship_flame.png" id="9_0tmvt"]
+[ext_resource type="Script" path="res://resources/scripts/EntityStats.cs" id="11_np7l6"]
+[ext_resource type="Script" path="res://resources/scripts/HurtboxComp.cs" id="12_4hu43"]
+[ext_resource type="Script" path="res://resources/scripts/HurtComp.cs" id="13_uunlu"]
+[ext_resource type="PackedScene" uid="uid://ks48wvmmkxsj" path="res://resources/effects/explosion_effect.tscn" id="14_ad12o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ms3b"]
 atlas = ExtResource("9_0tmvt")
@@ -110,8 +114,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Ship" type="Node2D"]
+[node name="Ship" type="Node2D" node_paths=PackedStringArray("stats", "explodeOnDeath")]
 script = ExtResource("1_lgidd")
+stats = NodePath("EntityStats")
+explodeOnDeath = NodePath("DeathExplosion")
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("Actor")]
 script = ExtResource("2_10dq0")
@@ -160,5 +166,24 @@ autoplay = "center"
 
 [node name="ShipAnimatedSprite" type="AnimatedSprite2D" parent="Anchor"]
 sprite_frames = SubResource("SpriteFrames_70pb0")
-animation = &"bank_left"
+animation = &"center"
 autoplay = "center"
+
+[node name="EntityStats" type="Node" parent="."]
+script = ExtResource("11_np7l6")
+
+[node name="HurtboxComp" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("12_4hu43")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtboxComp"]
+polygon = PackedVector2Array(-8, 3, 0, -7, 8, 3, 5, 5, 5, 8, -5, 8, -5, 5)
+
+[node name="HurtComp" type="Node" parent="." node_paths=PackedStringArray("stats", "hurtbox")]
+script = ExtResource("13_uunlu")
+stats = NodePath("../EntityStats")
+hurtbox = NodePath("../HurtboxComp")
+
+[node name="DeathExplosion" type="Node2D" parent="."]
+script = ExtResource("7_f4tsb")
+Scene = ExtResource("14_ad12o")
