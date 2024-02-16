@@ -23,6 +23,8 @@ public partial class Enemy : Node2D {
 
     [Export] Spawner onDeathEffect;
 
+    [Export] ScoreComp score;
+
     public override void _Ready() {
         visibleOnScreenNotifier.ScreenExited += QueueFree;
         hurtbox.Hurt += _ => {
@@ -31,6 +33,7 @@ public partial class Enemy : Node2D {
             shake.TweenShake();
         };
         entityStats.NoHealth += Death;
+        entityStats.NoHealth += () => score.AdjustScore();
         hitbox.HitHurtbox += _ => Death();
     }
 

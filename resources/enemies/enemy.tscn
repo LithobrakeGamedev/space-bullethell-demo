@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://br42cwo2rmdsy"]
+[gd_scene load_steps=15 format=3 uid="uid://br42cwo2rmdsy"]
 
 [ext_resource type="Script" path="res://resources/enemies/Enemy.cs" id="1_ceeb1"]
 [ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="2_tcq08"]
@@ -12,8 +12,10 @@
 [ext_resource type="Script" path="res://resources/scripts/ShakeComp.cs" id="10_7wfhg"]
 [ext_resource type="Script" path="res://resources/scripts/Spawner.cs" id="11_hibx3"]
 [ext_resource type="PackedScene" uid="uid://ks48wvmmkxsj" path="res://resources/effects/explosion_effect.tscn" id="12_rtv1j"]
+[ext_resource type="Script" path="res://resources/scripts/ScoreComp.cs" id="13_b0wgk"]
+[ext_resource type="Resource" uid="uid://coaigoadug4s4" path="res://resources/resources/GameStats.tres" id="14_8ds4j"]
 
-[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats", "shake", "hitbox", "hurtbox", "onDeathEffect")]
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats", "shake", "hitbox", "hurtbox", "onDeathEffect", "score")]
 script = ExtResource("1_ceeb1")
 animatedSprite2D = NodePath("AnimatedSprite2D")
 moveComponent = NodePath("MoveComponent")
@@ -25,6 +27,7 @@ shake = NodePath("ShakeComp")
 hitbox = NodePath("HitboxComp")
 hurtbox = NodePath("HurtboxComp")
 onDeathEffect = NodePath("Spawner")
+score = NodePath("ScoreComp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
@@ -68,3 +71,8 @@ node = NodePath("../AnimatedSprite2D")
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource("11_hibx3")
 Scene = ExtResource("12_rtv1j")
+
+[node name="ScoreComp" type="Node" parent="."]
+script = ExtResource("13_b0wgk")
+gameStats = ExtResource("14_8ds4j")
+scoreDelta = 5
