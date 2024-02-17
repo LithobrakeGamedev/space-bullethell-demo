@@ -54,9 +54,12 @@ node = NodePath("../AnimatedSprite2D")
 script = ExtResource("6_l8s4p")
 
 [node name="HitboxComp" type="Area2D" parent="."]
+collision_layer = 0
 script = ExtResource("7_refyh")
 
 [node name="HurtboxComp" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("8_x7gyy")
 
 [node name="HurtComp" type="Node" parent="." node_paths=PackedStringArray("stats", "hurtbox")]
@@ -71,6 +74,7 @@ node = NodePath("../AnimatedSprite2D")
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource("11_hibx3")
 Scene = ExtResource("12_rtv1j")
+ObjectName = "EnemyDeathExplosion"
 
 [node name="ScoreComp" type="Node" parent="."]
 script = ExtResource("13_b0wgk")

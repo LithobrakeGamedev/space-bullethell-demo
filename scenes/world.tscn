@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cgkyn0260au01" path="res://resources/effects/space_background.tscn" id="2_c8tyb"]
 [ext_resource type="Resource" uid="uid://coaigoadug4s4" path="res://resources/resources/GameStats.tres" id="2_vkkop"]
 [ext_resource type="PackedScene" uid="uid://b8et1avskqed" path="res://resources/enemies/green_enemy.tscn" id="3_cg0et"]
-[ext_resource type="PackedScene" uid="uid://c5dr1m1oe1feh" path="res://resources/enemies/enemy_generator.tscn" id="4_1imgp"]
+[ext_resource type="PackedScene" uid="uid://c5dr1m1oe1feh" path="res://resources/enemies/EnemyGeneration/enemy_generator.tscn" id="6_5o4mv"]
 [ext_resource type="LabelSettings" uid="uid://csm6eemwt2o8r" path="res://resources/fonts/default_label_settings.tres" id="7_hsdq6"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("playerShip", "scoreLabel")]
@@ -30,7 +30,7 @@ position = Vector2(133, 54)
 [node name="GreenEnemy3" parent="Enemies" instance=ExtResource("3_cg0et")]
 position = Vector2(85, 38)
 
-[node name="EnemyGenerator" parent="." instance=ExtResource("4_1imgp")]
+[node name="EnemyGenerator" parent="." instance=ExtResource("6_5o4mv")]
 
 [node name="ScoreLabel" type="Label" parent="."]
 offset_right = 160.0

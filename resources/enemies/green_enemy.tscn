@@ -57,15 +57,8 @@ FlashMaterial = ExtResource("3_ulfp0")
 [node name="EntityStats" parent="." index="6"]
 Health = 3
 
-[node name="HitboxComp" parent="." index="7"]
-collision_layer = 0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComp" index="0"]
 shape = SubResource("CircleShape2D_mhf5b")
-
-[node name="HurtboxComp" parent="." index="8"]
-collision_layer = 2
-collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComp" index="0"]
 shape = SubResource("CircleShape2D_chhyj")
