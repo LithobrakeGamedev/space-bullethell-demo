@@ -1,19 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cu4cnqr1sdne1"]
+[gd_scene load_steps=7 format=3 uid="uid://cu4cnqr1sdne1"]
 
-[ext_resource type="Script" path="res://resources/menus/Menu.cs" id="1_urmvh"]
+[ext_resource type="Script" path="res://resources/menus/GameOverMenu.cs" id="1_blxek"]
+[ext_resource type="Resource" uid="uid://coaigoadug4s4" path="res://resources/resources/GameStats.tres" id="2_2u7d2"]
 [ext_resource type="PackedScene" uid="uid://eeh0ilauvvk0" path="res://resources/menus/menu.tscn" id="2_3r1ml"]
 [ext_resource type="PackedScene" uid="uid://cgkyn0260au01" path="res://resources/effects/space_background.tscn" id="3_2rghy"]
 [ext_resource type="LabelSettings" uid="uid://c2u5aar70i4vb" path="res://resources/fonts/title_label_settings.tres" id="4_gr7mn"]
 [ext_resource type="LabelSettings" uid="uid://csm6eemwt2o8r" path="res://resources/fonts/default_label_settings.tres" id="5_bidrk"]
 
-[node name="GameOver" type="Control"]
+[node name="GameOver" type="Control" node_paths=PackedStringArray("score", "highScore")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_urmvh")
+script = ExtResource("1_blxek")
+score = NodePath("CenterContainer/VBoxContainer/ScoreHBoxContainer/ScoreValue")
+highScore = NodePath("CenterContainer/VBoxContainer/HighScoreHBoxContainer/ScoreValue")
+stats = ExtResource("2_2u7d2")
 gameScene = ExtResource("2_3r1ml")
 
 [node name="SpaceBackground" parent="." instance=ExtResource("3_2rghy")]
@@ -34,6 +38,38 @@ layout_mode = 2
 text = "Game Over"
 label_settings = ExtResource("4_gr7mn")
 horizontal_alignment = 1
+
+[node name="ScoreHBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer/ScoreHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Score:"
+label_settings = ExtResource("5_bidrk")
+
+[node name="ScoreValue" type="Label" parent="CenterContainer/VBoxContainer/ScoreHBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("5_bidrk")
+
+[node name="HighScoreHBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer/HighScoreHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "High Score:"
+label_settings = ExtResource("5_bidrk")
+
+[node name="ScoreValue" type="Label" parent="CenterContainer/VBoxContainer/HighScoreHBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("5_bidrk")
+
+[node name="Space" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
 
 [node name="MenuLabel" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
