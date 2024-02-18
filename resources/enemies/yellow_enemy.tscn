@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://6hcakpbkdbdo"]
+[gd_scene load_steps=10 format=3 uid="uid://6hcakpbkdbdo"]
 
 [ext_resource type="PackedScene" uid="uid://br42cwo2rmdsy" path="res://resources/enemies/enemy.tscn" id="1_wsofs"]
+[ext_resource type="Script" path="res://resources/enemies/YellowEnemy.cs" id="2_1oqgd"]
 [ext_resource type="Texture2D" uid="uid://1hwh0al02sfr" path="res://resources/assets/yellow_enemy.png" id="2_pfi44"]
 [ext_resource type="Script" path="res://resources/scripts/BorderBounceComp.cs" id="4_40s0l"]
 
@@ -33,6 +34,7 @@ size = Vector2(10, 10)
 size = Vector2(16, 10)
 
 [node name="YellowEnemy" instance=ExtResource("1_wsofs")]
+script = ExtResource("2_1oqgd")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_ql88a")

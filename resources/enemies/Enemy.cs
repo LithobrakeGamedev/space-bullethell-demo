@@ -6,7 +6,7 @@ namespace MovementTest.resources.enemies;
 public partial class Enemy : Node2D {
     [Export] AnimatedSprite2D animatedSprite2D;
 
-    [Export] private MoveComponent moveComponent;
+    [Export] protected MoveComponent moveComponent;
 
     [Export] VisibleOnScreenNotifier2D visibleOnScreenNotifier;
 
