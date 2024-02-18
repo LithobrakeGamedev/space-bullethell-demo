@@ -13,16 +13,15 @@ generationControllers = NodePath("SpawnControllers")
 
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource("2_6hf23")
-ObjectName = "Enemy"
 
 [node name="SpawnControllers" type="Node" parent="."]
 
-[node name="SimpleEnemyGenerationController" type="Node" parent="SpawnControllers"]
+[node name="GreenEnemyGenerationController" type="Node" parent="SpawnControllers"]
 script = ExtResource("3_bp3gq")
 enemy = ExtResource("4_nfsvx")
 timeInterval = 2.0
 
-[node name="SimpleEnemyGenerationController2" type="Node" parent="SpawnControllers"]
+[node name="YellowEnemyGenerationController2" type="Node" parent="SpawnControllers"]
 script = ExtResource("3_bp3gq")
 enemy = ExtResource("5_ggucc")
-timeInterval = 1.0
+timeInterval = 3.0

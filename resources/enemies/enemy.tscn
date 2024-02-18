@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://br42cwo2rmdsy"]
+[gd_scene load_steps=16 format=3 uid="uid://br42cwo2rmdsy"]
 
 [ext_resource type="Script" path="res://resources/enemies/Enemy.cs" id="1_ceeb1"]
 [ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="2_tcq08"]
 [ext_resource type="Script" path="res://resources/scripts/ScaleOnImpact.cs" id="3_kwbc8"]
 [ext_resource type="Script" path="res://resources/scripts/Flash.cs" id="4_fskyf"]
+[ext_resource type="Material" uid="uid://c88q6pkhh3vl" path="res://resources/effects/white_flash_material.tres" id="5_7sqji"]
 [ext_resource type="Script" path="res://resources/components/shake_component.gd" id="5_pbjcn"]
 [ext_resource type="Script" path="res://resources/scripts/EntityStats.cs" id="6_l8s4p"]
 [ext_resource type="Script" path="res://resources/scripts/HitboxComp.cs" id="7_refyh"]
@@ -26,7 +27,7 @@ entityStats = NodePath("EntityStats")
 shake = NodePath("ShakeComp")
 hitbox = NodePath("HitboxComp")
 hurtbox = NodePath("HurtboxComp")
-onDeathEffect = NodePath("Spawner")
+onDeathEffect = NodePath("OnDeathExplosion")
 score = NodePath("ScoreComp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -44,6 +45,7 @@ ScaleAmount = Vector2(1.5, 1.5)
 
 [node name="Flash" type="Node" parent="." node_paths=PackedStringArray("Sprite")]
 script = ExtResource("4_fskyf")
+FlashMaterial = ExtResource("5_7sqji")
 Sprite = NodePath("../AnimatedSprite2D")
 
 [node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
@@ -71,10 +73,9 @@ hurtbox = NodePath("../HurtboxComp")
 script = ExtResource("10_7wfhg")
 node = NodePath("../AnimatedSprite2D")
 
-[node name="Spawner" type="Node2D" parent="."]
+[node name="OnDeathExplosion" type="Node2D" parent="."]
 script = ExtResource("11_hibx3")
 Scene = ExtResource("12_rtv1j")
-ObjectName = "EnemyDeathExplosion"
 
 [node name="ScoreComp" type="Node" parent="."]
 script = ExtResource("13_b0wgk")

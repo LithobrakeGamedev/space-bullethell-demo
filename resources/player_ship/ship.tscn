@@ -144,7 +144,6 @@ position = Vector2(-5, -4)
 [node name="Spawner" type="Node2D" parent="Markers/LeftMuzzle"]
 script = ExtResource("7_f4tsb")
 Scene = ExtResource("8_3ej2b")
-ObjectName = "Laser"
 
 [node name="RightMuzzle" type="Marker2D" parent="Markers"]
 position = Vector2(5, -4)
@@ -152,7 +151,6 @@ position = Vector2(5, -4)
 [node name="Spawner" type="Node2D" parent="Markers/RightMuzzle"]
 script = ExtResource("7_f4tsb")
 Scene = ExtResource("8_3ej2b")
-ObjectName = "Laser"
 
 [node name="ScaleOnImpact" type="Node" parent="." node_paths=PackedStringArray("Sprite")]
 script = ExtResource("9_0nbd8")
@@ -189,4 +187,3 @@ hurtbox = NodePath("../HurtboxComp")
 [node name="DeathExplosion" type="Node2D" parent="."]
 script = ExtResource("7_f4tsb")
 Scene = ExtResource("14_ad12o")
-ObjectName = "PlayerDeathExplosion"

@@ -9,8 +9,6 @@ public partial class Spawner : Node2D {
     [Export(hintString: "The scene we want to spawn")]
     public PackedScene Scene;
 
-    [Export] public string ObjectName;
-
     public Node Spawn(Vector2? globalSpawnPosition = null, Node parent = null) {
         if (Scene is null)
             throw new Exception("Spawned scene has not been set");
@@ -24,10 +22,7 @@ public partial class Spawner : Node2D {
         if (instance is Node2D node2D) {
             node2D.GlobalPosition = globalSpawnPosition ?? GlobalPosition;
         }
-
-        // if (ObjectName is not null)
-        //     instance.Name = new StringName(ObjectName);
-
+        
         return instance;
     }
 }

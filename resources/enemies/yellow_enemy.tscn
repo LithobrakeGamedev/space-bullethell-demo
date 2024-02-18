@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://6hcakpbkdbdo"]
+[gd_scene load_steps=9 format=3 uid="uid://6hcakpbkdbdo"]
 
 [ext_resource type="PackedScene" uid="uid://br42cwo2rmdsy" path="res://resources/enemies/enemy.tscn" id="1_wsofs"]
 [ext_resource type="Texture2D" uid="uid://1hwh0al02sfr" path="res://resources/assets/yellow_enemy.png" id="2_pfi44"]
+[ext_resource type="Script" path="res://resources/scripts/BorderBounceComp.cs" id="4_40s0l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1q4ga"]
 atlas = ExtResource("2_pfi44")
@@ -39,11 +40,11 @@ autoplay = "default"
 frame_progress = 0.421896
 
 [node name="MoveComponent" parent="." index="1"]
-Velocity = Vector2(0, 10)
+Velocity = Vector2(20, 10)
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="2"]
-position = Vector2(0, 7)
-scale = Vector2(0.8, 1.4)
+position = Vector2(0, 0.5)
+scale = Vector2(0.8, 0.75)
 
 [node name="EntityStats" parent="." index="6"]
 Health = 6
@@ -57,3 +58,8 @@ debug_color = Color(0.211765, 0.623529, 0.411765, 0.419608)
 
 [node name="ScoreComp" parent="." index="12"]
 scoreDelta = 10
+
+[node name="BorderBounceComp" type="Node" parent="." index="13" node_paths=PackedStringArray("actor", "moveComponent")]
+script = ExtResource("4_40s0l")
+actor = NodePath("..")
+moveComponent = NodePath("../MoveComponent")

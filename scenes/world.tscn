@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpic5ft0kc0hp"]
+[gd_scene load_steps=7 format=3 uid="uid://bpic5ft0kc0hp"]
 
 [ext_resource type="Script" path="res://scenes/WorldScene.cs" id="1_574io"]
 [ext_resource type="PackedScene" uid="uid://bojrjpcuoafo1" path="res://resources/player_ship/ship.tscn" id="1_nlvxp"]
 [ext_resource type="PackedScene" uid="uid://cgkyn0260au01" path="res://resources/effects/space_background.tscn" id="2_c8tyb"]
 [ext_resource type="Resource" uid="uid://coaigoadug4s4" path="res://resources/resources/GameStats.tres" id="2_vkkop"]
-[ext_resource type="PackedScene" uid="uid://b8et1avskqed" path="res://resources/enemies/green_enemy.tscn" id="3_cg0et"]
 [ext_resource type="PackedScene" uid="uid://c5dr1m1oe1feh" path="res://resources/enemies/EnemyGeneration/enemy_generator.tscn" id="6_5o4mv"]
 [ext_resource type="LabelSettings" uid="uid://csm6eemwt2o8r" path="res://resources/fonts/default_label_settings.tres" id="7_hsdq6"]
 
@@ -20,15 +19,6 @@ position = Vector2(80, 216)
 [node name="SpaceBackground" parent="." instance=ExtResource("2_c8tyb")]
 
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="GreenEnemy" parent="Enemies" instance=ExtResource("3_cg0et")]
-position = Vector2(40, 54)
-
-[node name="GreenEnemy2" parent="Enemies" instance=ExtResource("3_cg0et")]
-position = Vector2(133, 54)
-
-[node name="GreenEnemy3" parent="Enemies" instance=ExtResource("3_cg0et")]
-position = Vector2(85, 38)
 
 [node name="EnemyGenerator" parent="." instance=ExtResource("6_5o4mv")]
 
