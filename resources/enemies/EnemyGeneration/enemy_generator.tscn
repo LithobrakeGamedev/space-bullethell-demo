@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5dr1m1oe1feh"]
+[gd_scene load_steps=7 format=3 uid="uid://c5dr1m1oe1feh"]
 
 [ext_resource type="Script" path="res://resources/enemies/EnemyGeneration/EnemyGenerator.cs" id="1_vkgti"]
 [ext_resource type="Script" path="res://resources/scripts/Spawner.cs" id="2_6hf23"]
 [ext_resource type="Script" path="res://resources/enemies/EnemyGeneration/SimpleEnemyGenerationController.cs" id="3_bp3gq"]
 [ext_resource type="PackedScene" uid="uid://b8et1avskqed" path="res://resources/enemies/green_enemy.tscn" id="4_nfsvx"]
 [ext_resource type="PackedScene" uid="uid://6hcakpbkdbdo" path="res://resources/enemies/yellow_enemy.tscn" id="5_ggucc"]
+[ext_resource type="PackedScene" uid="uid://dcaboawfdd7bf" path="res://resources/enemies/pink_enemy.tscn" id="6_ipkla"]
 
 [node name="EnemyGenerator" type="Node2D" node_paths=PackedStringArray("spawner", "generationControllers")]
 script = ExtResource("1_vkgti")
@@ -21,7 +22,12 @@ script = ExtResource("3_bp3gq")
 enemy = ExtResource("4_nfsvx")
 timeInterval = 2.0
 
-[node name="YellowEnemyGenerationController2" type="Node" parent="SpawnControllers"]
+[node name="YellowEnemyGenerationController" type="Node" parent="SpawnControllers"]
 script = ExtResource("3_bp3gq")
 enemy = ExtResource("5_ggucc")
 timeInterval = 3.0
+
+[node name="PinkEnemyGenerationController" type="Node" parent="SpawnControllers"]
+script = ExtResource("3_bp3gq")
+enemy = ExtResource("6_ipkla")
+timeInterval = 1.0
