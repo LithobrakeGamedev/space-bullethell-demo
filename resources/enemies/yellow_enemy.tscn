@@ -41,8 +41,10 @@ sprite_frames = SubResource("SpriteFrames_ql88a")
 autoplay = "default"
 frame_progress = 0.421896
 
-[node name="MoveComponent" parent="." index="1"]
+[node name="MoveComponent" parent="." index="1" node_paths=PackedStringArray("Actor")]
+Actor = NodePath("..")
 Velocity = Vector2(20, 10)
+metadata/_edit_pinned_properties_ = [&"Actor"]
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="2"]
 position = Vector2(0, 0.5)
