@@ -33,3 +33,7 @@ func _physics_process(_delta: float) -> void:
 	# Manipulate the position of the node by the shake amount every physics frame
 	# Use randf_range to pick a random x and y value using the shake value
 	node.position = Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
+
+
+func _on_projectile_spawner_child_entered_tree(node):
+	pass # Replace with function body.

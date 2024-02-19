@@ -30,4 +30,4 @@ timeInterval = 3.0
 [node name="PinkEnemyGenerationController" type="Node" parent="SpawnControllers"]
 script = ExtResource("3_bp3gq")
 enemy = ExtResource("6_ipkla")
-timeInterval = 1.0
+timeInterval = 4.0

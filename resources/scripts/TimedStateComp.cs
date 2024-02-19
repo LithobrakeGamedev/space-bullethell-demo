@@ -14,7 +14,7 @@ public partial class TimedStateComp : StateComp {
         timer = NodeBuilder.Timer(duration, this);
 
         timer.Timeout += () => {
-            InvokeStateFinished();
+            StateFinish();
             Disable();
         };
 

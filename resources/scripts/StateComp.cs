@@ -10,7 +10,7 @@ public partial class StateComp : Node {
     public event Action Disabled;
     public event Action StateFinished;
     
-    protected void InvokeStateFinished() {
+    public void StateFinish() {
         StateFinished?.Invoke();
     }
 

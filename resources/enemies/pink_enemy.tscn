@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcaboawfdd7bf"]
+[gd_scene load_steps=19 format=3 uid="uid://dcaboawfdd7bf"]
 
 [ext_resource type="PackedScene" uid="uid://br42cwo2rmdsy" path="res://resources/enemies/enemy.tscn" id="1_ocr6j"]
 [ext_resource type="Texture2D" uid="uid://c0tq5tc72v1xp" path="res://resources/assets/pink_enemy.png" id="2_ef417"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="4_wbtpg"]
 [ext_resource type="Script" path="res://resources/scripts/TimedStateComp.cs" id="4_xm6wy"]
 [ext_resource type="Script" path="res://resources/scripts/BorderBounceComp.cs" id="5_pjjqh"]
+[ext_resource type="Script" path="res://resources/scripts/StateComp.cs" id="8_1wg4y"]
+[ext_resource type="Script" path="res://resources/scripts/Spawner.cs" id="9_lypfj"]
+[ext_resource type="PackedScene" uid="uid://c8tak7qhpcvny" path="res://resources/projectiles/pink_enemy_projectile.tscn" id="10_2cll0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gdwqd"]
 atlas = ExtResource("2_ef417")
@@ -57,14 +60,21 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_yqx2e"]
 radius = 8.0
 
-[node name="PinkEnemy" node_paths=PackedStringArray("sideMove") instance=ExtResource("1_ocr6j")]
+[node name="PinkEnemy" node_paths=PackedStringArray("sideMove", "projectileSpawner", "fireState", "scale") instance=ExtResource("1_ocr6j")]
+position = Vector2(79, 35)
+scale = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res://resources/scripts/ScaleOnImpact.cs"),"Sprite":Object(AnimatedSprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"sprite_frames":SubResource("SpriteFrames_k6ijr"),"animation":&"default","autoplay":"default","frame":0,"frame_progress":0.0310072,"speed_scale":1.0,"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"script":null)
+,"ScaleAmount":Vector2(1.5, 1.5),"ScaleDuration":0.4)
+
 script = ExtResource("2_wayok")
 sideMove = NodePath("States/MoveSideState/MoveSideComponent")
+projectileSpawner = NodePath("States/FireState/ProjectileSpawner")
+fireState = NodePath("States/FireState")
+scale = NodePath("ScaleOnImpact")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_k6ijr")
 autoplay = "default"
-frame_progress = 0.0775271
+frame_progress = 0.0310072
 
 [node name="MoveComponent" parent="." index="1" node_paths=PackedStringArray("Actor")]
 process_mode = 4
@@ -114,6 +124,16 @@ script = ExtResource("5_pjjqh")
 actor = NodePath("../../..")
 moveComponent = NodePath("../MoveSideComponent")
 
-[node name="PauseState" type="Node" parent="States" index="2"]
+[node name="FireState" type="Node" parent="States" index="2"]
+script = ExtResource("8_1wg4y")
+
+[node name="ProjectileSpawner" type="Node2D" parent="States/FireState" index="0"]
+position = Vector2(79, 35)
+script = ExtResource("9_lypfj")
+Scene = ExtResource("10_2cll0")
+
+[node name="PauseState" type="Node" parent="States" index="3"]
 script = ExtResource("4_xm6wy")
 duration = 2.0
+
+[connection signal="child_entered_tree" from="States/FireState/ProjectileSpawner" to="ShakeComponent" method="_on_projectile_spawner_child_entered_tree"]
