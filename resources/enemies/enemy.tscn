@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://br42cwo2rmdsy"]
+[gd_scene load_steps=18 format=3 uid="uid://br42cwo2rmdsy"]
 
 [ext_resource type="Script" path="res://resources/enemies/Enemy.cs" id="1_ceeb1"]
 [ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="2_tcq08"]
@@ -15,8 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://ks48wvmmkxsj" path="res://resources/effects/explosion_effect.tscn" id="12_rtv1j"]
 [ext_resource type="Script" path="res://resources/scripts/ScoreComp.cs" id="13_b0wgk"]
 [ext_resource type="Resource" uid="uid://coaigoadug4s4" path="res://resources/resources/GameStats.tres" id="14_8ds4j"]
+[ext_resource type="AudioStream" uid="uid://crowx6dut35so" path="res://resources/sounds/hit_sound.wav" id="16_i45w4"]
+[ext_resource type="Script" path="res://resources/scripts/VariablePitchAudioStreamPlayerComp.cs" id="17_qbyqe"]
 
-[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats", "shake", "hitbox", "hurtbox", "onDeathEffect", "score")]
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats", "shake", "hitbox", "hurtbox", "onDeathEffect", "score", "sound")]
 script = ExtResource("1_ceeb1")
 animatedSprite2D = NodePath("AnimatedSprite2D")
 moveComponent = NodePath("MoveComponent")
@@ -29,6 +31,7 @@ hitbox = NodePath("HitboxComp")
 hurtbox = NodePath("HurtboxComp")
 onDeathEffect = NodePath("OnDeathExplosion")
 score = NodePath("ScoreComp")
+sound = NodePath("VariablePitchAudioStreamPlayerComp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
@@ -81,3 +84,8 @@ Scene = ExtResource("12_rtv1j")
 script = ExtResource("13_b0wgk")
 gameStats = ExtResource("14_8ds4j")
 scoreDelta = 5
+
+[node name="VariablePitchAudioStreamPlayerComp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_i45w4")
+bus = &"Sounds"
+script = ExtResource("17_qbyqe")

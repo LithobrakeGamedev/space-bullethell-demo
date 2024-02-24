@@ -12,7 +12,7 @@ extends AudioStreamPlayer
 @export var auto_play_with_variance: = false
 
 func _ready() -> void:
-	# If auto play with variance is on, call the function to play the sound in the ready function
+	# If auto play with variance is on, call the function to pla the sound in the ready function
 	if auto_play_with_variance:
 		play_with_variance(0.0)
 

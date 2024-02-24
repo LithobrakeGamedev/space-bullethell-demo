@@ -14,8 +14,9 @@ public partial class Ship : Node2D {
     private AnimatedSprite2D shipFlameSprite;
     private MoveComponent moveComponent;
 
-    [Export] EntityStats stats;
-    [Export] Spawner explodeOnDeath;
+    [Export] private EntityStats stats;
+    [Export] private Spawner explodeOnDeath;
+    [Export] private VariablePitchAudioStreamPlayerComp audio;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
@@ -40,6 +41,7 @@ public partial class Ship : Node2D {
     }
 
     private void FireLasers() {
+        audio.PlayWithVariance(0);
         leftMuzzle.Spawn();
         rightMuzzle.Spawn();
         scaleOnImpact.TweenScale();
