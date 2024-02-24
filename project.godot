@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 ResourceStash="*res://resources/resources/ResourceStash.cs"
+Music="*res://resources/sounds/music.tscn"
 
 [display]
 
