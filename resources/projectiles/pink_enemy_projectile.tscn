@@ -89,9 +89,8 @@ position = Vector2(75, 53)
 script = ExtResource("1_7fcw7")
 hitbox = NodePath("Anchor/HitboxComp")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("Actor")]
+[node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("1_epllu")
-Actor = NodePath("..")
 Velocity = Vector2(0, 30)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

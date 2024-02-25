@@ -122,9 +122,8 @@ stats = NodePath("EntityStats")
 explodeOnDeath = NodePath("DeathExplosion")
 audio = NodePath("VariablePitchAudioStreamPlayerComp")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("Actor")]
+[node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("2_10dq0")
-Actor = NodePath("..")
 
 [node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("MoveComponent")]
 script = ExtResource("3_awplj")

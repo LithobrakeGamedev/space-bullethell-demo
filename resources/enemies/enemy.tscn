@@ -35,9 +35,8 @@ sound = NodePath("VariablePitchAudioStreamPlayerComp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("Actor")]
+[node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("2_tcq08")
-Actor = NodePath("..")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
