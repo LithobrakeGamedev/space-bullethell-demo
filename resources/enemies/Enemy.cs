@@ -10,7 +10,7 @@ public partial class Enemy : Node2D {
 
     [Export] VisibleOnScreenNotifier2D visibleOnScreenNotifier;
 
-    [Export] ScaleOnImpact scaleOnImpact;
+    [Export] protected ScaleOnImpact scaleOnImpact;
 
     [Export] Flash flash;
 
