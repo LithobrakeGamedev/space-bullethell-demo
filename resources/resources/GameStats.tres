@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_1hrv8")
 Score = 0
-highScore = 0
+HighScore = 0

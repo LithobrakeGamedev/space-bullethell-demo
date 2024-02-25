@@ -5,11 +5,14 @@ namespace MovementTest.resources.scripts;
 
 [RegisteredType("MoveComponent", "", nameof(Node))]
 public partial class MoveComponent : Node {
-	[Export] public Node2D Actor;
+	[Export] public NodePath ActorPath = new("..");
 	[Export] public Vector2 Velocity;
+	private Node2D actor;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Ready() {
+		actor = GetNode<Node2D>(ActorPath);
+	}
 	public override void _Process(double delta) {
-		Actor.Translate(Velocity * (float)delta);
+		actor.Translate(Velocity * (float)delta);
 	}
 }

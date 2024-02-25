@@ -6,11 +6,11 @@ namespace MovementTest.resources.enemies;
 public partial class Enemy : Node2D {
     [Export] AnimatedSprite2D animatedSprite2D;
 
-    [Export] private MoveComponent moveComponent;
+    [Export] protected MoveComponent moveComponent;
 
     [Export] VisibleOnScreenNotifier2D visibleOnScreenNotifier;
 
-    [Export] ScaleOnImpact scaleOnImpact;
+    [Export] protected ScaleOnImpact scaleOnImpact;
 
     [Export] Flash flash;
 
@@ -25,12 +25,15 @@ public partial class Enemy : Node2D {
 
     [Export] ScoreComp score;
 
+    [Export] VariablePitchAudioStreamPlayerComp sound;
+
     public override void _Ready() {
         visibleOnScreenNotifier.ScreenExited += QueueFree;
         hurtbox.Hurt += _ => {
             scaleOnImpact.TweenScale();
             flash.ApplyFlash();
             shake.TweenShake();
+            sound.PlayWithVariance(0);
         };
         entityStats.NoHealth += Death;
         entityStats.NoHealth += () => score.AdjustScore();

@@ -1,0 +1,130 @@
+[gd_scene load_steps=17 format=3 uid="uid://c8tak7qhpcvny"]
+
+[ext_resource type="Script" path="res://resources/scripts/Laser.cs" id="1_7fcw7"]
+[ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="1_epllu"]
+[ext_resource type="Script" path="res://resources/scripts/ScaleOnImpact.cs" id="3_7liub"]
+[ext_resource type="Texture2D" uid="uid://dgkpc1dy7prbs" path="res://resources/assets/pink_enemy_projectile.png" id="3_ddift"]
+[ext_resource type="Script" path="res://resources/scripts/Flash.cs" id="4_u3fs0"]
+[ext_resource type="Script" path="res://resources/scripts/HitboxComp.cs" id="4_v7w8i"]
+[ext_resource type="Material" uid="uid://c88q6pkhh3vl" path="res://resources/effects/white_flash_material.tres" id="5_s0ndk"]
+
+[sub_resource type="Animation" id="Animation_kgf1c"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Anchor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ypmyp"]
+resource_name = "oscillate"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Anchor:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-4, 0), Vector2(4, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3rj4p"]
+_data = {
+"RESET": SubResource("Animation_kgf1c"),
+"oscillate": SubResource("Animation_ypmyp")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkonf"]
+atlas = ExtResource("3_ddift")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmar4"]
+atlas = ExtResource("3_ddift")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgu0x"]
+atlas = ExtResource("3_ddift")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5idcr"]
+atlas = ExtResource("3_ddift")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g03iv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkonf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmar4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgu0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5idcr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rcb8y"]
+radius = 3.0
+
+[node name="PinkEnemyProjectile" type="Node2D" node_paths=PackedStringArray("hitbox")]
+position = Vector2(75, 53)
+script = ExtResource("1_7fcw7")
+hitbox = NodePath("Anchor/HitboxComp")
+
+[node name="MoveComponent" type="Node" parent="."]
+script = ExtResource("1_epllu")
+Velocity = Vector2(0, 30)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-2.38419e-07, 4.76837e-07)
+scale = Vector2(0.9, 0.6)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../VisibleOnScreenNotifier2D")
+libraries = {
+"": SubResource("AnimationLibrary_3rj4p")
+}
+autoplay = "oscillate"
+
+[node name="ScaleOnImpact" type="Node" parent="." node_paths=PackedStringArray("Sprite")]
+script = ExtResource("3_7liub")
+Sprite = NodePath("../Anchor/AnimatedSprite2D")
+ScaleAmount = Vector2(2, 2)
+ScaleDuration = 0.6
+
+[node name="Flash" type="Node" parent="." node_paths=PackedStringArray("Sprite")]
+script = ExtResource("4_u3fs0")
+FlashMaterial = ExtResource("5_s0ndk")
+Sprite = NodePath("../Anchor/AnimatedSprite2D")
+
+[node name="Anchor" type="Node2D" parent="."]
+position = Vector2(-4, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Anchor"]
+sprite_frames = SubResource("SpriteFrames_g03iv")
+autoplay = "default"
+
+[node name="HitboxComp" type="Area2D" parent="Anchor"]
+collision_layer = 0
+script = ExtResource("4_v7w8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/HitboxComp"]
+shape = SubResource("CircleShape2D_rcb8y")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://br42cwo2rmdsy"]
+[gd_scene load_steps=18 format=3 uid="uid://br42cwo2rmdsy"]
 
 [ext_resource type="Script" path="res://resources/enemies/Enemy.cs" id="1_ceeb1"]
 [ext_resource type="Script" path="res://resources/scripts/MoveComponent.cs" id="2_tcq08"]
 [ext_resource type="Script" path="res://resources/scripts/ScaleOnImpact.cs" id="3_kwbc8"]
 [ext_resource type="Script" path="res://resources/scripts/Flash.cs" id="4_fskyf"]
+[ext_resource type="Material" uid="uid://c88q6pkhh3vl" path="res://resources/effects/white_flash_material.tres" id="5_7sqji"]
 [ext_resource type="Script" path="res://resources/components/shake_component.gd" id="5_pbjcn"]
 [ext_resource type="Script" path="res://resources/scripts/EntityStats.cs" id="6_l8s4p"]
 [ext_resource type="Script" path="res://resources/scripts/HitboxComp.cs" id="7_refyh"]
@@ -14,8 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://ks48wvmmkxsj" path="res://resources/effects/explosion_effect.tscn" id="12_rtv1j"]
 [ext_resource type="Script" path="res://resources/scripts/ScoreComp.cs" id="13_b0wgk"]
 [ext_resource type="Resource" uid="uid://coaigoadug4s4" path="res://resources/resources/GameStats.tres" id="14_8ds4j"]
+[ext_resource type="AudioStream" uid="uid://crowx6dut35so" path="res://resources/sounds/hit_sound.wav" id="16_i45w4"]
+[ext_resource type="Script" path="res://resources/scripts/VariablePitchAudioStreamPlayerComp.cs" id="17_qbyqe"]
 
-[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats", "shake", "hitbox", "hurtbox", "onDeathEffect", "score")]
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animatedSprite2D", "moveComponent", "visibleOnScreenNotifier", "scaleOnImpact", "flash", "entityStats", "shake", "hitbox", "hurtbox", "onDeathEffect", "score", "sound")]
 script = ExtResource("1_ceeb1")
 animatedSprite2D = NodePath("AnimatedSprite2D")
 moveComponent = NodePath("MoveComponent")
@@ -26,14 +29,14 @@ entityStats = NodePath("EntityStats")
 shake = NodePath("ShakeComp")
 hitbox = NodePath("HitboxComp")
 hurtbox = NodePath("HurtboxComp")
-onDeathEffect = NodePath("Spawner")
+onDeathEffect = NodePath("OnDeathExplosion")
 score = NodePath("ScoreComp")
+sound = NodePath("VariablePitchAudioStreamPlayerComp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("Actor")]
+[node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("2_tcq08")
-Actor = NodePath("..")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -44,6 +47,7 @@ ScaleAmount = Vector2(1.5, 1.5)
 
 [node name="Flash" type="Node" parent="." node_paths=PackedStringArray("Sprite")]
 script = ExtResource("4_fskyf")
+FlashMaterial = ExtResource("5_7sqji")
 Sprite = NodePath("../AnimatedSprite2D")
 
 [node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
@@ -54,9 +58,12 @@ node = NodePath("../AnimatedSprite2D")
 script = ExtResource("6_l8s4p")
 
 [node name="HitboxComp" type="Area2D" parent="."]
+collision_layer = 0
 script = ExtResource("7_refyh")
 
 [node name="HurtboxComp" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("8_x7gyy")
 
 [node name="HurtComp" type="Node" parent="." node_paths=PackedStringArray("stats", "hurtbox")]
@@ -68,7 +75,7 @@ hurtbox = NodePath("../HurtboxComp")
 script = ExtResource("10_7wfhg")
 node = NodePath("../AnimatedSprite2D")
 
-[node name="Spawner" type="Node2D" parent="."]
+[node name="OnDeathExplosion" type="Node2D" parent="."]
 script = ExtResource("11_hibx3")
 Scene = ExtResource("12_rtv1j")
 
@@ -76,3 +83,8 @@ Scene = ExtResource("12_rtv1j")
 script = ExtResource("13_b0wgk")
 gameStats = ExtResource("14_8ds4j")
 scoreDelta = 5
+
+[node name="VariablePitchAudioStreamPlayerComp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_i45w4")
+bus = &"Sounds"
+script = ExtResource("17_qbyqe")

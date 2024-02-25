@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bojrjpcuoafo1"]
+[gd_scene load_steps=28 format=3 uid="uid://bojrjpcuoafo1"]
 
 [ext_resource type="Texture2D" uid="uid://cdk00h57c8e4f" path="res://resources/assets/ship.png" id="1_j3egb"]
 [ext_resource type="Script" path="res://resources/scripts/Ship.cs" id="1_lgidd"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" path="res://resources/scripts/HurtboxComp.cs" id="12_4hu43"]
 [ext_resource type="Script" path="res://resources/scripts/HurtComp.cs" id="13_uunlu"]
 [ext_resource type="PackedScene" uid="uid://ks48wvmmkxsj" path="res://resources/effects/explosion_effect.tscn" id="14_ad12o"]
+[ext_resource type="AudioStream" uid="uid://dgq7acdqdt2vi" path="res://resources/sounds/laser_sound.wav" id="15_22jj2"]
+[ext_resource type="Script" path="res://resources/scripts/VariablePitchAudioStreamPlayerComp.cs" id="16_nb43f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ms3b"]
 atlas = ExtResource("9_0tmvt")
@@ -114,14 +116,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Ship" type="Node2D" node_paths=PackedStringArray("stats", "explodeOnDeath")]
+[node name="Ship" type="Node2D" node_paths=PackedStringArray("stats", "explodeOnDeath", "audio")]
 script = ExtResource("1_lgidd")
 stats = NodePath("EntityStats")
 explodeOnDeath = NodePath("DeathExplosion")
+audio = NodePath("VariablePitchAudioStreamPlayerComp")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("Actor")]
+[node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("2_10dq0")
-Actor = NodePath("..")
 
 [node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("MoveComponent")]
 script = ExtResource("3_awplj")
@@ -187,3 +189,8 @@ hurtbox = NodePath("../HurtboxComp")
 [node name="DeathExplosion" type="Node2D" parent="."]
 script = ExtResource("7_f4tsb")
 Scene = ExtResource("14_ad12o")
+
+[node name="VariablePitchAudioStreamPlayerComp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_22jj2")
+bus = &"Sounds"
+script = ExtResource("16_nb43f")

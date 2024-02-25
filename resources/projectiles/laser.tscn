@@ -18,9 +18,8 @@ hitbox = NodePath("HitboxComp")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_te7po")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("Actor")]
+[node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("2_p5c2d")
-Actor = NodePath("..")
 Velocity = Vector2(0, -200)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
